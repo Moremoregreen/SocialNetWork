@@ -2,4 +2,8 @@
     <string name="app_name">SocialNetWork</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="CreateAccount">Create Account</string>
+    <string name="Login">Login</string>
+    <string name="DontHaveAnAccount">Don\'t Have An Account, Need New Account</string>
+    <string name="orLoginOther">Or Login With</string>
 </resources>
