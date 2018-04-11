@@ -6,4 +6,8 @@
     <string name="Login">Login</string>
     <string name="DontHaveAnAccount">Don\'t Have An Account, Need New Account</string>
     <string name="orLoginOther">Or Login With</string>
+    <string name="userName">UserName</string>
+    <string name="fullName">FullName</string>
+    <string name="country">Country</string>
+    <string name="setup_btn_save">Save</string>
 </resources>
