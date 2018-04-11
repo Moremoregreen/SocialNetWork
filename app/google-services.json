@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "937820248881",
+    "firebase_url": "https://poster-212c2.firebaseio.com",
+    "project_id": "poster-212c2",
+    "storage_bucket": "poster-212c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937820248881:android:cf35bad27d0a0132",
+        "android_client_info": {
+          "package_name": "com.moremoregreen.socialnetwork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937820248881-tqsfk002d82cb1gmc69g399d6414u8qc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moremoregreen.socialnetwork",
+            "certificate_hash": "27951ba61472771e7b3d42ed1cf73852e17ff76d"
+          }
+        },
+        {
+          "client_id": "937820248881-k5v3s489om9akg6o4r8juoc4tbde84f5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGnfsN4RPKFVyfJ42g43MO7_eoCYFWWBQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937820248881-k5v3s489om9akg6o4r8juoc4tbde84f5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
