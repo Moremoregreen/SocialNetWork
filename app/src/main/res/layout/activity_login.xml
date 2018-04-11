@@ -74,7 +74,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/LoginWith"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_account_link"
@@ -82,14 +82,13 @@
         android:paddingTop="5dp"
         android:text="@string/orLoginOther"
         android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView2"
+        android:layout_below="@id/LoginWith"
         android:orientation="horizontal"
         android:paddingTop="10dp">
 
