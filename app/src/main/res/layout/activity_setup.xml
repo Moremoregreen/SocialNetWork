@@ -58,7 +58,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/inputs"
-        android:drawableLeft="@drawable/country_V2"
+        android:drawableLeft="@drawable/country_v2"
         android:ems="10"
         android:hint="@string/country"
         android:inputType="textMultiLine"

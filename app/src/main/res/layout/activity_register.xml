@@ -67,7 +67,6 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/button"
         android:padding="15dp"
-        android:text="Button"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="22sp"
