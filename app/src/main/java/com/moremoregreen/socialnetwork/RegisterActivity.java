@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                SendUserToSetupActivity();
+                                SendUserToSetupActivity();//做到這邊時發生OutOfMemery，去Manifests+largeHeap=true
                                 Toast.makeText(RegisterActivity.this, "You are authenticated successfully!", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss(); // 卸載所建立的myDialog物件
                             }else {
