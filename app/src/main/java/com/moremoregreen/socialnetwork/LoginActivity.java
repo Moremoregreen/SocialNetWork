@@ -17,20 +17,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
     private Button LoginButton;
     private EditText UserEmail, UserPassword;
     private TextView NeedNewAccountLink;
     private ProgressDialog loadingBar;
-    private FirebaseAuth mauth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mauth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         NeedNewAccountLink = findViewById(R.id.register_account_link);
         UserEmail = findViewById(R.id.login_email);
@@ -54,6 +55,15 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            SendUserToMainActivity();
+        }
+    }
+
     private void AllowingUserToLogin() {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
@@ -69,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
 
 
-            mauth.signInWithEmailAndPassword(email, password)
+            mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

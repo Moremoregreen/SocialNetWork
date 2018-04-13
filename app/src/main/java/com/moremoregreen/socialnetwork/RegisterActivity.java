@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText UserEmail, UserPassword, UserConfirmPassword;
@@ -44,6 +45,22 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null){
+            SendUserToMainActivity();
+        }
+    }
+    private void SendUserToMainActivity() {
+        Intent setupIntent = new Intent(RegisterActivity.this, MainActivity.class);
+
+        //ClearTast->摧毀目標Activity和它之上的所有Acitvity,重新創建目標Activity
+        setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(setupIntent);
+        finish();
+    }
     private void CreatNewAccount() {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
