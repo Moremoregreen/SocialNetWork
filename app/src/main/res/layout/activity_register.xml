@@ -70,5 +70,5 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
         android:textSize="22sp"
-        tools:text="@string/CreateAccount" />
+        android:text="@string/CreateAccount" />
 </RelativeLayout>
