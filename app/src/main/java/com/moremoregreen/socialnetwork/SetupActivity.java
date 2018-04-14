@@ -84,9 +84,15 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    String image = dataSnapshot.child("profileimage").getValue().toString();
-                    //這邊用了Picasso lib -->http://square.github.io/picasso/
-                    Picasso.get().load(image).placeholder(R.drawable.profile).into(ProfileImage);
+                    //加上驗證 ***重要***
+                    if(dataSnapshot.hasChild("profileimage")){
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
+                        //這邊用了Picasso lib -->http://square.github.io/picasso/
+                        Picasso.get().load(image).placeholder(R.drawable.profile).into(ProfileImage);
+                    }else {
+                        Toast.makeText(SetupActivity.this, "Please select profile image first.", Toast.LENGTH_SHORT).show();
+                    }
+                    
 
                 }
             }

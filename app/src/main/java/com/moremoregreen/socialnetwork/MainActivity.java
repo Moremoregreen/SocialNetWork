@@ -72,11 +72,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    String fullname = dataSnapshot.child("fullname").getValue().toString(); //從dataBase拿fullname
-                    String image = dataSnapshot.child("profileimage").getValue().toString();
-
-                    NavProfileUserName.setText(fullname);
-                    Picasso.get().load(image).placeholder(R.drawable.profile).into(NavProfileImage);
+                    //需要加上驗證  ***重要***
+                    if(dataSnapshot.hasChild("fullname")){
+                        String fullname = dataSnapshot.child("fullname").getValue().toString(); //從dataBase拿fullname
+                        NavProfileUserName.setText(fullname);
+                    }
+                    if(dataSnapshot.hasChild("profileimage")){
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.get().load(image).placeholder(R.drawable.profile).into(NavProfileImage);
+                    }else {
+                        Toast.makeText(MainActivity.this, "Profile name do not exists!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
