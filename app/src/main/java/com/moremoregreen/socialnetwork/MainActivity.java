@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 //import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,9 +33,13 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView postlist;
     private Toolbar mToolbar;
+    private CircleImageView NavProfileImage;
+    private TextView NavProfileUserName;
 
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef;
+
+    String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
 
@@ -55,6 +64,28 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.navigation_view);
         View navView = navigationView.inflateHeaderView(R.layout.navigation_heder); //在navigation_menu上面放navigation_header
+        //記得要navView.fb
+        NavProfileImage = navView.findViewById(R.id.nav_profile_image);
+        NavProfileUserName = navView.findViewById(R.id.nav_user_full_name);
+
+        UsersRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String fullname = dataSnapshot.child("fullname").getValue().toString(); //從dataBase拿fullname
+                    String image = dataSnapshot.child("profileimage").getValue().toString();
+
+                    NavProfileUserName.setText(fullname);
+                    Picasso.get().load(image).placeholder(R.drawable.profile).into(NavProfileImage);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
