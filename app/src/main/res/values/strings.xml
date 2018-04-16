@@ -10,4 +10,5 @@
     <string name="fullName">FullName</string>
     <string name="country">Country</string>
     <string name="setup_btn_save">Save</string>
+    <string name="updatePost">Update Post</string>
 </resources>
