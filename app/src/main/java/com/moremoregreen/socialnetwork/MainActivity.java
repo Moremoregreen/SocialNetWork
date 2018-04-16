@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private CircleImageView NavProfileImage;
     private TextView NavProfileUserName;
+    private ImageButton AddNewPostButon;
 
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef;
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);//有時候這邊會出錯appcompatActivity、v7相關的。到上面import V7Toolbar並刪掉沒V7的就好了
         getSupportActionBar().setTitle("Home");
+
+        AddNewPostButon = findViewById(R.id.add_new_post_button);
 
         //產生home旁邊的三條線，可以點導覽選單出來
         drawerLayout = findViewById(R.id.drawable_layout);
@@ -100,6 +104,21 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        AddNewPostButon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendUserToPostActivity();
+
+            }
+        });
+    }
+
+
+    private void SendUserToPostActivity() {
+        Intent addNewPostIntent = new Intent(MainActivity.this, PostActivity.class);
+        startActivity(addNewPostIntent);
+
     }
 
     @Override
@@ -161,9 +180,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void UserMenuSelector(MenuItem item) {
         switch (item.getItemId()){
-//            case R.id.nav_post:
-//                Toast.makeText(this, "Post", Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.nav_post:
+                SendUserToPostActivity();
+                break;
             case R.id.nav_profile:
                 Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
                 break;
