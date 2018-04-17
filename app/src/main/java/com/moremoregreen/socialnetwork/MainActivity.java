@@ -7,14 +7,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 //import android.widget.Toolbar;
 
@@ -32,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    private RecyclerView postlist;
+    private RecyclerView postList;
     private Toolbar mToolbar;
     private CircleImageView NavProfileImage;
     private TextView NavProfileUserName;
     private ImageButton AddNewPostButon;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef;
+    private DatabaseReference UsersRef, PostsRef;
 
     String currentUserId;
 
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
@@ -65,12 +74,20 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         navigationView = findViewById(R.id.navigation_view);
+
+        postList = findViewById(R.id.all_users_post_list);
+        postList.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        postList.setLayoutManager(linearLayoutManager);
+
         View navView = navigationView.inflateHeaderView(R.layout.navigation_heder); //在navigation_menu上面放navigation_header
         //記得要navView.fb
         NavProfileImage = navView.findViewById(R.id.nav_profile_image);
         NavProfileUserName = navView.findViewById(R.id.nav_user_full_name);
+
 
         UsersRef.child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -112,6 +129,63 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        DisplayAllUsersPosts();
+    }
+
+    private void DisplayAllUsersPosts() {
+        FirebaseRecyclerAdapter<Posts, PostsViewHolder > firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Posts, PostsViewHolder>(
+                        Posts.class,
+                        R.layout.all_post_layout,
+                        PostsViewHolder.class,
+                        PostsRef
+                ) {
+                    @Override
+                    protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position) {
+                        viewHolder.setFullname(model.getFullname());
+                        viewHolder.setTime(model.getTime());
+                        viewHolder.setDate(model.getDate());
+                        viewHolder.setDescription(model.getDescription());
+                        viewHolder.setProfileimage(model.getProfileimage());
+                        viewHolder.setPostimage(model.getPostimage());
+
+                    }
+                };
+        postList.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class PostsViewHolder extends RecyclerView.ViewHolder{
+        View mView;
+        public PostsViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+        }
+
+        public void setFullname(String fullname){
+            TextView username = mView.findViewById(R.id.post_user_name);
+            username.setText(fullname);
+        }
+        public void setProfileimage(String profileimage){
+            CircleImageView image = mView.findViewById(R.id.post_profile_image);
+            Picasso.get().load(profileimage).into(image);
+        }
+        public void setTime(String time){
+            TextView PostTime = mView.findViewById(R.id.post_time);
+            PostTime.setText("   " + time);
+        }
+        public void setDate(String date){
+            TextView PostDate = mView.findViewById(R.id.post_date);
+            PostDate.setText("   " + date);
+        }
+        public void setDescription(String description){
+            TextView PostDescription = mView.findViewById(R.id.post_description);
+            PostDescription.setText(description);
+        }
+        public void setPostimage(String postimage){
+            ImageView PostImage = mView.findViewById(R.id.post_image);
+            Picasso.get().load(postimage).into(PostImage);
+        }
     }
 
 

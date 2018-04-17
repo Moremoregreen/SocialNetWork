@@ -151,7 +151,7 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("date", saveCurrentDate);
                     postsMap.put("time", saveCurrentTime);
                     postsMap.put("description", Description);
-                    postsMap.put("post", downloadUrl);
+                    postsMap.put("postimage", downloadUrl); //T23改為 postimage
                     postsMap.put("profileimage", userProfileImage);
                     postsMap.put("fullname", userFullName);
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
