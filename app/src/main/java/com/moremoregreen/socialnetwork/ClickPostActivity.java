@@ -1,11 +1,13 @@
 package com.moremoregreen.socialnetwork;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -47,17 +49,19 @@ public class ClickPostActivity extends AppCompatActivity {
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                description = dataSnapshot.child("description").getValue().toString();
-                image = dataSnapshot.child("postimage").getValue().toString();
-                databaseUserID = dataSnapshot.child("uid").getValue().toString();//取得PO文者的UID
+                if(dataSnapshot.exists()){//這個不加程式會崩潰
+                    description = dataSnapshot.child("description").getValue().toString();
+                    image = dataSnapshot.child("postimage").getValue().toString();
+                    databaseUserID = dataSnapshot.child("uid").getValue().toString();//取得PO文者的UID
 
-                PostDescription.setText(description);
-                Picasso.get().load(image).into(PostImage);
+                    PostDescription.setText(description);
+                    Picasso.get().load(image).into(PostImage);
 
-                //如果上線的人跟PO文的人一樣的話，Button顯現出來
-                if(currentUserID.equals(databaseUserID)){
-                    DeletePostButton.setVisibility(View.VISIBLE);
-                    EditPostButton.setVisibility(View.VISIBLE);
+                    //如果上線的人跟PO文的人一樣的話，Button顯現出來
+                    if(currentUserID.equals(databaseUserID)){
+                        DeletePostButton.setVisibility(View.VISIBLE);
+                        EditPostButton.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -66,5 +70,32 @@ public class ClickPostActivity extends AppCompatActivity {
 
             }
         });
+
+        DeletePostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteCurrentPost();
+            }
+        });
+
+        EditPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void DeleteCurrentPost() {
+        ClickPostRef.removeValue();
+        SendUserToMainActivity();
+        Toast.makeText(this, "文章已刪除", Toast.LENGTH_SHORT).show();
+    }
+
+    private void SendUserToMainActivity() {
+        Intent mainIntent = new Intent(ClickPostActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 }
