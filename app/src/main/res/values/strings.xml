@@ -13,4 +13,12 @@
     <string name="updatePost">Update Post</string>
     <string name="deletepost">刪除貼文</string>
     <string name="editpost">編輯貼文</string>
+    <string name="setting_username">暱稱</string>
+    <string name="setting_profile_status">個人狀態</string>
+    <string name="setting_user_fullname">姓名</string>
+    <string name="setting_country">國家</string>
+    <string name="setting_dob">生日</string>
+    <string name="setting_gender">性別</string>
+    <string name="setting_relationship_status">友誼關係</string>
+    <string name="setting_update_account_button">更新資訊</string>
 </resources>
