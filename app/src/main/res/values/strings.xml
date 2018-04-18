@@ -11,4 +11,6 @@
     <string name="country">Country</string>
     <string name="setup_btn_save">Save</string>
     <string name="updatePost">Update Post</string>
+    <string name="deletepost">刪除貼文</string>
+    <string name="editpost">編輯貼文</string>
 </resources>
