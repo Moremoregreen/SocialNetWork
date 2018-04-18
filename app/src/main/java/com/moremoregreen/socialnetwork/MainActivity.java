@@ -253,6 +253,11 @@ public class MainActivity extends AppCompatActivity {
         finish();//這樣可防止user利用back回mainActivity
     }
 
+    private void SendUserToSettingActivity() {
+        Intent settingIntent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(settingIntent);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //讓home旁邊三條線點選後會把左邊導覽叫出來
@@ -284,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "message", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_settings:
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                SendUserToSettingActivity();
                 break;
             case R.id.nav_logout:
                 mAuth.signOut();
