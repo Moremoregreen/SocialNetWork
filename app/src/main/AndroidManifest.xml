@@ -29,8 +29,10 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".PostActivity" />
         <activity android:name=".ClickPostActivity" />
-        <activity android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
