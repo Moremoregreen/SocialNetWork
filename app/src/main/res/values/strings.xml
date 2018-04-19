@@ -21,4 +21,6 @@
     <string name="setting_gender">性別</string>
     <string name="setting_relationship_status">人際關係</string>
     <string name="setting_update_account_button">更新資訊</string>
+    <string name="findfriends">請輸入對方@之後的部分</string>
+    <string name="searchinput">點此尋找...</string>
 </resources>

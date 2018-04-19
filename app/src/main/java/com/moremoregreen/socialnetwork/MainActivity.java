@@ -261,6 +261,10 @@ public class MainActivity extends AppCompatActivity {
         Intent settingIntent = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(settingIntent);
     }
+    private void SendUserToFindFriendsActivity() {
+        Intent settingIntent = new Intent(MainActivity.this, FindFriendsActivity.class);
+        startActivity(settingIntent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -287,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Friends", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_find_friends:
-                Toast.makeText(this, "Find_friends", Toast.LENGTH_SHORT).show();
+                SendUserToFindFriendsActivity();
                 break;
             case R.id.nav_message:
                 Toast.makeText(this, "message", Toast.LENGTH_SHORT).show();
