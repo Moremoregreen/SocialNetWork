@@ -257,6 +257,10 @@ public class MainActivity extends AppCompatActivity {
         Intent settingIntent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(settingIntent);
     }
+    private void SendUserToProfileActivity() {
+        Intent settingIntent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(settingIntent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -274,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                 SendUserToPostActivity();
                 break;
             case R.id.nav_profile:
-                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show();
+                SendUserToProfileActivity();
                 break;
             case R.id.nav_home:
                 Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
