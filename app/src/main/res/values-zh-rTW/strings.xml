@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SocialNetWork</string>
+    <string name="deletepost">刪除貼文</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="searchinput">點此尋找...</string>
+    <string name="findfriends">請輸入對方名字</string>
+    <string name="editpost">編輯貼文</string>
+    <string name="setting_username">暱稱</string>
+    <string name="setting_country">國家</string>
+    <string name="setting_profile_status">個人狀態</string>
+    <string name="setting_gender">性別</string>
+    <string name="setting_user_fullname">姓名</string>
+    <string name="setting_update_account_button">更新資訊</string>
+    <string name="setting_dob">生日</string>
+    <string name="setting_relationship_status">人際關係</string>
+    <string name="userName">暱稱</string>
+    <string name="updatePost">發布貼文</string>
+    <string name="setup_btn_save">儲存</string>
+    <string name="orLoginOther">或是以下列帳號登入</string>
+    <string name="Login">登入</string>
+    <string name="fullName">姓名</string>
+    <string name="drawer_close">Drawer Close</string>
+    <string name="DontHaveAnAccount">還沒有帳號，新增一個</string>
+    <string name="CreateAccount">創建帳號</string>
+    <string name="country">國家</string>
+</resources>

@@ -28,7 +28,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/username"
         android:ems="10"
-        android:hint="@string/userName"
+        android:hint="暱稱"
         android:inputType="textMultiLine"
         android:padding="14dp" />
 
@@ -44,7 +44,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/name"
         android:ems="10"
-        android:hint="@string/fullName"
+        android:hint="姓名"
         android:inputType="textMultiLine"
         android:padding="14dp" />
 
@@ -60,7 +60,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/country_v2"
         android:ems="10"
-        android:hint="@string/country"
+        android:hint="國家"
         android:inputType="textMultiLine"
         android:padding="14dp" />
 

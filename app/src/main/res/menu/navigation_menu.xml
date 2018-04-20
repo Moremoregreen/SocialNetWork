@@ -2,35 +2,35 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_post"
-        android:title="Add New Post"
+        android:title="發文"
         android:icon="@drawable/add_post"/>
     <item
         android:id="@+id/nav_profile"
-        android:title="Profile"
+        android:title="個人頁面"
         android:icon="@drawable/profile_icon"/>
     <item
         android:id="@+id/nav_home"
-        android:title="Home"
+        android:title="首頁"
         android:icon="@drawable/home"/>
     <item
         android:id="@+id/nav_friends"
-        android:title="Friends"
+        android:title="好友"
         android:icon="@drawable/friends"/>
     <item
         android:id="@+id/nav_find_friends"
-        android:title="Find Friends"
+        android:title="尋找好友"
         android:icon="@drawable/find_people"/>
     <item
         android:id="@+id/nav_message"
-        android:title="Messages"
+        android:title="訊息"
         android:icon="@drawable/messages"/>
     <item
         android:id="@+id/nav_settings"
-        android:title="Settings"
+        android:title="設定"
         android:icon="@drawable/settings"/>
     <item
         android:id="@+id/nav_logout"
-        android:title="Logout"
+        android:title="登出"
         android:icon="@drawable/logout"/>
 
 </menu>

@@ -26,7 +26,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/email"
         android:ems="10"
-        android:hint="Email"
+        android:hint="信箱"
         android:inputType="textEmailAddress"
         android:padding="8dp" />
 
@@ -40,7 +40,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/password"
         android:ems="10"
-        android:hint="Password"
+        android:hint="密碼"
         android:inputType="textPassword"
         android:padding="8dp" />
 
@@ -54,11 +54,10 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/button"
         android:padding="15dp"
-        android:text="Login"
+        android:text="登入"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
-        android:textSize="22sp"
-        tools:text="@string/Login" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/register_account_link"
@@ -67,7 +66,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/login_button"
         android:layout_marginTop="10dp"
-        android:text="@string/DontHaveAnAccount"
+        android:text="如果沒有帳號，點此行新增"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
@@ -80,7 +79,7 @@
         android:layout_below="@+id/register_account_link"
         android:layout_centerHorizontal="true"
         android:paddingTop="5dp"
-        android:text="@string/orLoginOther"
+        android:text="或是以下列帳號登入"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />

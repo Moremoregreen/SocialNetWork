@@ -26,7 +26,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/email"
         android:ems="10"
-        android:hint="Email"
+        android:hint="信箱"
         android:inputType="textEmailAddress"
         android:padding="10dp" />
 
@@ -40,7 +40,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/password"
         android:ems="10"
-        android:hint="Password"
+        android:hint="密碼"
         android:inputType="textPassword"
         android:padding="10dp" />
 
@@ -54,7 +54,7 @@
         android:background="@drawable/inputs"
         android:drawableLeft="@drawable/password"
         android:ems="10"
-        android:hint="Confirm Password"
+        android:hint="確認密碼"
         android:inputType="textPassword"
         android:padding="10dp" />
 
