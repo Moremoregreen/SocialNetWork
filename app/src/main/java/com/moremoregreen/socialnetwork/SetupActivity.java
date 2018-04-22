@@ -3,10 +3,9 @@ package com.moremoregreen.socialnetwork;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -90,13 +89,10 @@ public class SetupActivity extends AppCompatActivity {
                         //這邊用了Picasso lib -->http://square.github.io/picasso/
                         Picasso.get().load(image).placeholder(R.drawable.profile).into(ProfileImage);
                     }else {
-                        Toast.makeText(SetupActivity.this, "Please select profile image first.", Toast.LENGTH_SHORT).show();
-                    }
-                    
-
+                        Toast.makeText(SetupActivity.this, "請先請先選擇照片.", Toast.LENGTH_SHORT).show();
+                  }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -122,8 +118,8 @@ public class SetupActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == RESULT_OK){
 
-                loadingBar.setTitle("Profile Image");
-                loadingBar.setMessage("Please Wait for updating your profile image!");
+                loadingBar.setTitle("個人照片");
+                loadingBar.setMessage("照片上傳中，請稍等!");
                 loadingBar.setCanceledOnTouchOutside(true);
                 loadingBar.show();
 
@@ -136,7 +132,7 @@ public class SetupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(SetupActivity.this,
-                                    "Profile Image Stored Successfully to Firebase Storage!"
+                                    "照片已成功儲存到 Firebase Storage!"
                                     , Toast.LENGTH_SHORT).show();
 
                             final String downloadUrl = task.getResult().getDownloadUrl().toString();
@@ -150,12 +146,12 @@ public class SetupActivity extends AppCompatActivity {
                                                 startActivity(selfIntent);
 
                                                 Toast.makeText(SetupActivity.this,
-                                                        "Profile Image Stored to Firebase Database Successfully!",
+                                                        "照片已成功儲存到 Firebase Database!",
                                                         Toast.LENGTH_SHORT).show();
                                                 loadingBar.dismiss();
                                             }else {
                                                 String message = task.getException().getMessage();
-                                                Toast.makeText(SetupActivity.this, "Error occured:"+ message, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SetupActivity.this, "發生錯誤:"+ message, Toast.LENGTH_SHORT).show();
                                                 loadingBar.dismiss();
                                             }
                                         }
@@ -165,7 +161,7 @@ public class SetupActivity extends AppCompatActivity {
                 });
             }
             else {
-                Toast.makeText(this, "Error Occured: Image can be cropped. Try Again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "照片上傳失敗，請重新上傳", Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }
@@ -177,18 +173,18 @@ public class SetupActivity extends AppCompatActivity {
         String country = CountryName.getText().toString();
 
         if(TextUtils.isEmpty(username)){
-            Toast.makeText(this, "Please Wirte Your UserName!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入暱稱!", Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(fullname)){
-            Toast.makeText(this, "Please Wirte Your FullName!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入姓名!", Toast.LENGTH_SHORT).show();
         }
         if(TextUtils.isEmpty(country)){
-            Toast.makeText(this, "Please Wirte Your CountryName!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入國家!", Toast.LENGTH_SHORT).show();
         }
         else {
 
-            loadingBar.setTitle("Saving Information");
-            loadingBar.setMessage("Please Wait, while we are creating your new Account...");
+            loadingBar.setTitle("儲存中");
+            loadingBar.setMessage("帳號創建中，請稍等");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 
@@ -197,19 +193,19 @@ public class SetupActivity extends AppCompatActivity {
             userMap.put("fullname", fullname);
             userMap.put("country", country);
             userMap.put("status", "這個人還在構思中");
-            userMap.put("gender", "none");
-            userMap.put("dob", "none");//生日
-            userMap.put("relationshipstatus", "none");
+            userMap.put("gender", "");
+            userMap.put("dob", "");//生日
+            userMap.put("relationshipstatus", "");
             UsersRef.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if(task.isSuccessful()){
                         SendUserToMainActivity();
-                        Toast.makeText(SetupActivity.this, "Your Account is created Successfully!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SetupActivity.this, "帳號已創建成功!", Toast.LENGTH_LONG).show();
                         loadingBar.dismiss();
                     }else {
                         String message = task.getException().getMessage();
-                        Toast.makeText(SetupActivity.this, "Error Occored:" + message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetupActivity.this, "發生錯誤:" + message, Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
                 }

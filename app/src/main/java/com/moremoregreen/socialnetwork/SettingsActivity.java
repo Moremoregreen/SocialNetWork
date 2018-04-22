@@ -145,8 +145,8 @@ public class SettingsActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == RESULT_OK){
 
-                loadingBar.setTitle("Profile Image");
-                loadingBar.setMessage("Please Wait for updating your profile image!");
+                loadingBar.setTitle("個人照片");
+                loadingBar.setMessage("請稍等，照片正在上傳中!");
                 loadingBar.setCanceledOnTouchOutside(true);
                 loadingBar.show();
 
@@ -160,7 +160,7 @@ public class SettingsActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(SettingsActivity.this,
-                                    "Profile Image Stored Successfully to Firebase Storage!"
+                                    "照片已成功儲存到 Firebase Storage!"
                                     , Toast.LENGTH_SHORT).show();
 
                             final String downloadUrl = task.getResult().getDownloadUrl().toString();
@@ -174,12 +174,12 @@ public class SettingsActivity extends AppCompatActivity {
                                                 startActivity(selfIntent);
 
                                                 Toast.makeText(SettingsActivity.this,
-                                                        "Profile Image Stored to Firebase Database Successfully!",
+                                                        "照片已成功儲存到 Firebase Database!",
                                                         Toast.LENGTH_SHORT).show();
                                                 loadingBar.dismiss();
                                             }else {
                                                 String message = task.getException().getMessage();
-                                                Toast.makeText(SettingsActivity.this, "Error occured:"+ message, Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SettingsActivity.this, "發生錯誤:"+ message, Toast.LENGTH_SHORT).show();
                                                 loadingBar.dismiss();
                                             }
                                         }
@@ -189,7 +189,7 @@ public class SettingsActivity extends AppCompatActivity {
                 });
             }
             else {
-                Toast.makeText(this, "Error Occured: Image can be cropped. Try Again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "上傳發生錯誤，請重新上傳.", Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }
@@ -221,8 +221,8 @@ public class SettingsActivity extends AppCompatActivity {
         }else if(TextUtils.isEmpty(relationship)){
             Toast.makeText(this, "請輸入人際關係", Toast.LENGTH_SHORT).show();
         }else {
-            loadingBar.setTitle("Profile Image");
-            loadingBar.setMessage("Please Wait for updating your profile image!");
+            loadingBar.setTitle("個人照片");
+            loadingBar.setMessage("照片正在上傳中，請稍等!");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 

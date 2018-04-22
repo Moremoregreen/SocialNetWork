@@ -2,11 +2,9 @@ package com.moremoregreen.socialnetwork;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,11 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.Api;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -33,10 +27,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity {
     private Button LoginButton;
@@ -87,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(LoginActivity.this, "Connect to Google Sign in failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "連接失敗", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -110,8 +100,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-            loadingBar.setTitle("Google Sign In !");
-            loadingBar.setMessage("Please Wait, while we are allowing you to login using your Google Account...");
+            loadingBar.setTitle("Google sign in !");
+            loadingBar.setMessage("帳號驗證中，請稍等");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
@@ -120,10 +110,10 @@ public class LoginActivity extends AppCompatActivity {
             if(result.isSuccess()){
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-                Toast.makeText(this, "Please wait, while we are getting your auth result...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "正在取得認證結果，請稍等", Toast.LENGTH_SHORT).show();
 
             }else {
-                Toast.makeText(this, "Can't get Auth result.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "無法取得認證結果.", Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
         }
@@ -147,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             String message = task.getException().getMessage();
                             SendUserToLoginActivity();
-                            Toast.makeText(LoginActivity.this, "Not Authenticated : " + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "驗證未通過 : " + message, Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
                         }
 
@@ -177,12 +167,12 @@ public class LoginActivity extends AppCompatActivity {
         String password = UserPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){//判斷是否為空
-            Toast.makeText(this, "Please Wirte Your Email!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入帳號!!", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Please Write Your Password!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入密碼!!", Toast.LENGTH_SHORT).show();
         }else {
-            loadingBar.setTitle("Log in ");
-            loadingBar.setMessage("Please Wait, while we are allowing you to login into your Account...");
+            loadingBar.setTitle("登入");
+            loadingBar.setMessage("驗證帳號中，請稍等");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
@@ -194,13 +184,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 SendUserToMainActivity();
-                                Toast.makeText(LoginActivity.this, "You are Logged in successfully.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登入成功.", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }else {//失敗的話
                                 String message = task.getException().getMessage();
                                 Toast.makeText(LoginActivity.this, "Error occured:"+ message, Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
-                            }
+                          }
                         }
                     });
         }

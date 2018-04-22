@@ -2,12 +2,10 @@ package com.moremoregreen.socialnetwork;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
-import android.provider.ContactsContract;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,12 +69,12 @@ public class PostActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);//剛打完會error，要去import加上 .support.v7變成android.support.v7.widget.Toolbar;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //這邊是要弄個向左的箭頭(←)讓使用者可以視覺上可以點擊返回MainAct
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
+        getSupportActionBar().setTitle("更新貼文");
 
 
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+         public void onClick(View v) {
                 OpenGallery();
             }
         });
@@ -93,12 +90,12 @@ public class PostActivity extends AppCompatActivity {
     private void validatePostInfo() {
         Description = PostDescription.getText().toString();
         if(ImageUri == null){
-            Toast.makeText(this, "Please Select Post Image...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請選擇照片", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(Description)){
-            Toast.makeText(this, "Please Say Something About Your Image...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請敘述您的照片", Toast.LENGTH_SHORT).show();
         }else {
-            loadingBar.setTitle("Add New Post");
-            loadingBar.setMessage("Please Wait,  while we are updating your new post...");
+            loadingBar.setTitle("發文");
+            loadingBar.setMessage("貼文正在發布，請稍等");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 
@@ -128,11 +125,11 @@ public class PostActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if(task.isSuccessful()){
                     downloadUrl= task.getResult().getDownloadUrl().toString();
-                    Toast.makeText(PostActivity.this, "Image Uploading Successfully to Storage...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "照片上傳成功", Toast.LENGTH_SHORT).show();
                     SavingPostInfoImformationToDatabase();
                 }else {
                     String message = task.getException().getMessage();
-                    Toast.makeText(PostActivity.this, "Error Occured:" + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, "發生錯誤:" + message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -161,12 +158,12 @@ public class PostActivity extends AppCompatActivity {
                                     if(task.isSuccessful()){
                                         SendUserToMainActivity();
                                         Toast.makeText(PostActivity.this,
-                                                "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
+                                                "貼文已更新.", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }else {
                                         String message = task.getException().getMessage();
                                         Toast.makeText(PostActivity.this,
-                                                "Error Occured while updating your post:" + message, Toast.LENGTH_SHORT).show();
+                                                "更新錯誤:" + message, Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
                                 }

@@ -4,7 +4,6 @@ public class Posts {
     public String uid, time, date, postimage, description, profileimage, fullname;
 
     public Posts(){
-
     }
 
     public Posts(String uid, String time, String date, String postimage, String description, String profileimage, String fullname) {

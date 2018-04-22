@@ -1,22 +1,19 @@
 package com.moremoregreen.socialnetwork;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,8 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 //import android.widget.Toolbar;
@@ -102,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
                         Picasso.get().load(image).placeholder(R.drawable.profile).into(NavProfileImage);
                     }else {
-                        Toast.makeText(MainActivity.this, "Profile name do not exists!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "用戶不存在!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -237,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void SendUserToSetupActivity() {
         Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
-
         //ClearTast->摧毀目標Activity和它之上的所有Acitvity,重新創建目標Activity
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(setupIntent);
@@ -246,7 +240,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void SendUserToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-
         //ClearTast->摧毀目標Activity和它之上的所有Acitvity,重新創建目標Activity
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
@@ -272,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
         if(actionBarDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

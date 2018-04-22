@@ -55,7 +55,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void SendUserToMainActivity() {
         Intent setupIntent = new Intent(RegisterActivity.this, MainActivity.class);
-
         //ClearTast->摧毀目標Activity和它之上的所有Acitvity,重新創建目標Activity
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(setupIntent);
@@ -67,18 +66,18 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = UserConfirmPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Please write your Email...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入信箱...", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Please write your Password...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入密碼...", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(confirmPassword)){
-            Toast.makeText(this, "Please confirm your Password...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入確認密碼...", Toast.LENGTH_SHORT).show();
         }else if(!password.equals(confirmPassword)){
-            Toast.makeText(this, "Your password don't match with your confirm password...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "您的密碼與確認密碼不符...", Toast.LENGTH_SHORT).show();
         }else {
             //彈出一個對話框告知使用者目前正在創建帳戶避免使用者會以為程式當掉, 而把程式強制關閉。
             //這個就是ProgressDialog的用途。
-            loadingBar.setTitle("Creating New Account");
-            loadingBar.setMessage("Please Wait, while we are creating your new Account...");
+            loadingBar.setTitle("創建帳號");
+            loadingBar.setMessage("請稍等，我們正在建立帳號");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
 
@@ -88,17 +87,16 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 SendUserToSetupActivity();//做到這邊時發生OutOfMemery，去Manifests+largeHeap=true
-                                Toast.makeText(RegisterActivity.this, "You are authenticated successfully!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "您已通過驗證!", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss(); // 卸載所建立的myDialog物件
                             }else {
                                 String message = task.getException().getMessage();
-                                Toast.makeText(RegisterActivity.this, "Error Occured:" + message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "發生錯誤:" + message, Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
                         }
                     });
         }
-
         }
 
     private void SendUserToSetupActivity() {
