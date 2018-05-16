@@ -89,7 +89,7 @@ public class SetupActivity extends AppCompatActivity {
                         //這邊用了Picasso lib -->http://square.github.io/picasso/
                         Picasso.get().load(image).placeholder(R.drawable.profile).into(ProfileImage);
                     }else {
-                        Toast.makeText(SetupActivity.this, "請先請先選擇照片.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetupActivity.this, "請先選擇照片.", Toast.LENGTH_SHORT).show();
                   }
                 }
             }

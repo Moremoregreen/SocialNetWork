@@ -95,7 +95,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if(dataSnapshot.hasChild("profileimage")){
                         String image = dataSnapshot.child("profileimage").getValue().toString();
-                        Picasso.get().load(image).placeholder(R.drawable.profile).into(NavProfileImage);
+                        Picasso.get().load(image)
+                                .placeholder(R.drawable.profile)
+//                                .resize(500,0)
+//                                .resizeDimen(R.dimen.main_image_size,0)
+                                .fit()
+                                .into(NavProfileImage);
                     }else {
                         Toast.makeText(MainActivity.this, "用戶不存在!", Toast.LENGTH_SHORT).show();
                     }
