@@ -23,4 +23,6 @@
     <string name="findfriends">please write username</string>
     <string name="searchinput">Search here...</string>
     <string name="userName">username</string>
+    <string name="comments">Comments：</string>
+    <string name="writesoming">Write a comment here</string>
 </resources>

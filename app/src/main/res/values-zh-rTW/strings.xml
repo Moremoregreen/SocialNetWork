@@ -24,4 +24,6 @@
     <string name="DontHaveAnAccount">還沒有帳號，新增一個</string>
     <string name="CreateAccount">創建帳號</string>
     <string name="country">國家</string>
+    <string name="comments">留言：</string>
+    <string name="writesoming">寫些什麼...</string>
 </resources>

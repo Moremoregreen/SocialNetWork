@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     String currentUserId;
     Boolean LikeChecker = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef = FirebaseDatabase.getInstance().getReference().child("Likes");
-
+  
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);//有時候這邊會出錯appcompatActivity、v7相關的。到上面import V7Toolbar並刪掉沒V7的就好了
         getSupportActionBar().setTitle("Home");
@@ -167,6 +168,16 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(clickPostIntent);
                             }
                         });
+
+                        viewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent commentsIntent = new Intent(MainActivity.this, CommentsActivity.class);
+                                commentsIntent.putExtra("PostKey", PostKey);
+                                startActivity(commentsIntent);
+                            }
+                        });
+
                         viewHolder.LikePostButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
