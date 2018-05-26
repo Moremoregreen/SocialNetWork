@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Comment;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
@@ -51,11 +54,12 @@ public class CommentsActivity extends AppCompatActivity {
 
     private void findViews() {
         CommentsList = findViewById(R.id.comments_list);
-        CommentsList.setHasFixedSize(true);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         CommentsList.setLayoutManager(linearLayoutManager);
+        CommentsList.setHasFixedSize(true);
 
         CommentInputText = findViewById(R.id.comment_input);
         PostCommentButton = findViewById(R.id.post_comment_btn);
@@ -81,6 +85,56 @@ public class CommentsActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseRecyclerAdapter<Comments, CommentsViewHolder> firebaseRecyclerAdapter
+                = new FirebaseRecyclerAdapter<Comments, CommentsViewHolder>(
+                Comments.class,
+                R.layout.all_comments_layout,
+                CommentsViewHolder.class,
+                PostsRef
+        ) {
+            @Override
+            protected void populateViewHolder(CommentsViewHolder viewHolder, Comments model, int position) {
+                viewHolder.setUsername(model.getUsername());
+                viewHolder.setComment(model.getComment());
+                viewHolder.setDate(model.getDate());
+                viewHolder.setTime(model.getTime());
+            }
+        };
+        CommentsList.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class CommentsViewHolder extends RecyclerView.ViewHolder {
+        View mView;
+
+        public CommentsViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+        }
+
+        public void setUsername(String username) {
+            TextView myUserNmae = mView.findViewById(R.id.comment_username);
+            myUserNmae.setText("@" + username + " ");
+        }
+
+        public void setComment(String comment) {
+            TextView myComment = mView.findViewById(R.id.comments_text);
+            myComment.setText(comment);
+        }
+
+        public void setDate(String date) {
+            TextView myDate = mView.findViewById(R.id.comments_date);
+            myDate.setText("  Date: " + date);
+        }
+
+        public void setTime(String time) {
+            TextView myTime = mView.findViewById(R.id.comments_time);
+            myTime.setText("  Time: "+time);
+        }
     }
 
     private void ValidateComment(String userName) {
@@ -111,9 +165,9 @@ public class CommentsActivity extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener() {
                         @Override
                         public void onComplete(@NonNull Task task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(CommentsActivity.this, "已成功留言...", Toast.LENGTH_SHORT).show();
-                            }else {
+                            } else {
                                 Toast.makeText(CommentsActivity.this, "請再試一次", Toast.LENGTH_SHORT).show();
                             }
                         }
