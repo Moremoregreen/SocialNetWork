@@ -47,7 +47,7 @@ public class PostActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id;
-
+    private long countPosts = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,12 +136,30 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void SavingPostInfoImformationToDatabase() {
+        PostsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    countPosts = dataSnapshot.getChildrenCount();
+                }else {
+                    countPosts = 0;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    String userFullName = dataSnapshot.child("fullname").getValue().toString();
-                    String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
+                    final String userFullName = dataSnapshot.child("fullname").getValue().toString();
+                    final String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
 
                     HashMap postsMap = new HashMap();
                     postsMap.put("uid", current_user_id);
@@ -151,6 +169,7 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("postimage", downloadUrl); //T23改為 postimage
                     postsMap.put("profileimage", userProfileImage);
                     postsMap.put("fullname", userFullName);
+                    postsMap.put("counter", countPosts);
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
@@ -168,6 +187,7 @@ public class PostActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
 
                 }
             }
