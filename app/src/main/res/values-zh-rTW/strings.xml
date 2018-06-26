@@ -26,4 +26,5 @@
     <string name="country">國家</string>
     <string name="comments">留言：</string>
     <string name="writesoming">寫些什麼...</string>
+    <string name="forgetPassword">忘記密碼</string>
 </resources>
