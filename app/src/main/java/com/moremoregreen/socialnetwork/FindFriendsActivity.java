@@ -1,5 +1,6 @@
 package com.moremoregreen.socialnetwork;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -73,10 +74,20 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         ) {
             @Override
-            protected void populateViewHolder(FindFriendsViewHolder viewHolder, FindFriedns model, int position) {
+            protected void populateViewHolder(FindFriendsViewHolder viewHolder, FindFriedns model, final int position) {
                 viewHolder.setFullname(model.getFullname());
                 viewHolder.setStatus(model.getStatus());
                 viewHolder.setProfileimage(model.getProfileimage());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String visit_user_id = getRef(position).getKey();
+                        Intent profileIntent = new Intent(FindFriendsActivity.this,PersonProfileActivity.class);
+                        profileIntent.putExtra("visit_user_id" , visit_user_id);
+                        startActivity(profileIntent);
+                    }
+                });
             }
         };
         SearchResultList.setAdapter(firebaseRecyclerAdapter);
