@@ -342,13 +342,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(settingIntent);
     }
     private void SendUserToProfileActivity() {
-        Intent settingIntent = new Intent(MainActivity.this, ProfileActivity.class);
-        startActivity(settingIntent);
+        Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(profileIntent);
     }
     private void SendUserToFindFriendsActivity() {
-        Intent settingIntent = new Intent(MainActivity.this, FindFriendsActivity.class);
-        startActivity(settingIntent);
+        Intent findFriendsIntent = new Intent(MainActivity.this, FindFriendsActivity.class);
+        startActivity(findFriendsIntent);
     }
+    private void SendUserToFriendsActivity() {
+        Intent friendsIntent = new Intent(MainActivity.this, FriendsActivity.class);
+        startActivity(friendsIntent);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -371,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_friends:
-                Toast.makeText(this, "Friends", Toast.LENGTH_SHORT).show();
+                SendUserToFriendsActivity();
                 break;
             case R.id.nav_find_friends:
                 SendUserToFindFriendsActivity();
