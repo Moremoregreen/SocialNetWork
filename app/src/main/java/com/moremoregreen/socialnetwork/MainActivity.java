@@ -382,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
                 SendUserToFindFriendsActivity();
                 break;
             case R.id.nav_message:
-                Toast.makeText(this, "message", Toast.LENGTH_SHORT).show();
+                SendUserToFriendsActivity();
                 break;
             case R.id.nav_settings:
                 SendUserToSettingActivity();
