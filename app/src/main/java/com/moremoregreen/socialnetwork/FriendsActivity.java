@@ -88,6 +88,7 @@ public class FriendsActivity extends AppCompatActivity {
                                             if(which == 1){
                                                 Intent chatIntent = new Intent(FriendsActivity.this, ChatActivity.class);
                                                 chatIntent.putExtra("visit_user_id", userIDs);
+                                                chatIntent.putExtra("userName", userName);
                                                 startActivity(chatIntent);
                                             }
                                         }
