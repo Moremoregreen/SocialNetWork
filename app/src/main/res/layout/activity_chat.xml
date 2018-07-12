@@ -37,7 +37,7 @@
             android:src="@drawable/ic_select_image"/>
         <EditText
             android:id="@+id/input_message"
-            android:layout_width="270dp"
+            android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:hint="請輸入文字"
             android:padding="17dp"/>
