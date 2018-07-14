@@ -1,12 +1,14 @@
 package com.moremoregreen.socialnetwork;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -73,6 +75,17 @@ public class FindFriendsActivity extends AppCompatActivity {
                         searchPeopleandFriendsQuery
 
         ) {
+            @NonNull
+            @Override
+            public FindFriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull FindFriendsViewHolder holder, int position, @NonNull FindFriedns model) {
+
+            }
+
             @Override
             protected void populateViewHolder(FindFriendsViewHolder viewHolder, FindFriedns model, final int position) {
                 viewHolder.setFullname(model.getFullname());

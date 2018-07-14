@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -90,13 +92,31 @@ public class CommentsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        FirebaseRecyclerOptions<>
         FirebaseRecyclerAdapter<Comments, CommentsViewHolder> firebaseRecyclerAdapter
                 = new FirebaseRecyclerAdapter<Comments, CommentsViewHolder>(
-                Comments.class,
-                R.layout.all_comments_layout,
-                CommentsViewHolder.class,
-                PostsRef
+//                Comments.class,
+//                R.layout.all_comments_layout,
+//                CommentsViewHolder.class,
+//                PostsRef
         ) {
+            @NonNull
+            @Override
+            public CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.all_comments_layout, parent, false);
+
+                return new CommentsViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull CommentsViewHolder viewHolder, int position, @NonNull Comments model) {
+                viewHolder.setUsername(model.getUsername());
+                viewHolder.setComment(model.getComment());
+                viewHolder.setDate(model.getDate());
+                viewHolder.setTime(model.getTime());
+            }
+
             @Override
             protected void populateViewHolder(CommentsViewHolder viewHolder, Comments model, int position) {
                 viewHolder.setUsername(model.getUsername());
